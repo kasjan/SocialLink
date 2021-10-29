@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="text-center py-5 my-5">
+        <a href="{% url 'login' %}" type="button" class="btn-lg btn-warning mx-3">Log in</a>
+        <a href="{% url 'register' %}" type="button" class="btn-lg btn-warning mx-3">Join us</a>
+    </div>
+{% endblock %}
