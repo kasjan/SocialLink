@@ -1,10 +1,9 @@
 <html>
 <div style="text-align:center">
-<h1>{{ user }} links</h1>
+    <h1>{{ user }} links</h1>
     {% for obj in object_list %}
-        <img src="{{ obj.social.icon.url }}" alt="{{ obj.social.name}}" width="50" height="50">
-<br>
-    <a href="{{ obj.link }}" target="_blank">{{ obj.social }}</a><br/>
+        <img src="{{ obj.social.icon.url }}" alt="{{ obj.social.name }}" width="50" height="50"><br>
+        <a href="{{ obj.link }}" target="_blank">{{ obj.social }}</a><br/>
         <br>
     {% endfor %}
 </div>
