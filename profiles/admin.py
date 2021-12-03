@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import Social
 from .models import Link
 
@@ -10,6 +11,3 @@ class LinkAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Link, LinkAdmin)
-
-
-

@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -13,21 +14,18 @@ class Social(models.Model):
 
 
 class Link(models.Model):
-    id = models.AutoField(
-        primary_key=True
-    )
-    Social = models.ForeignKey(
+    social = models.ForeignKey(
         Social,
         on_delete=models.CASCADE,
         blank=False,
         null=False,
-        unique=True,
     )
     link = models.URLField(
         blank=False
     )
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        User,
+        related_name='link',
         on_delete=models.CASCADE,
         blank=False)
 
