@@ -5,6 +5,7 @@ from .serializers import SocialSerializer
 from .serializers import LinkSerializer
 from .serializers import UserSerializer
 from rest_framework import permissions
+from .custompermissions import IsCurrentUserOwnerOrReadOnly
 
 
 class SocialList(generics.ListCreateAPIView):
@@ -25,15 +26,17 @@ class LinkList(generics.ListCreateAPIView):
     queryset = Link.objects.all()
     serializer_class = LinkSerializer
     name = 'link-list'
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class LinkDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Link.objects.all()
     serializer_class = LinkSerializer
     name = 'link-detail'
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsCurrentUserOwnerOrReadOnly]
 
 
 class UserLink(generics.ListAPIView):
