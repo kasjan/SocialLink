@@ -1,0 +1,12 @@
+<html>
+<div style="text-align:center">
+<h1>{{ user }} links</h1>
+    {% for obj in object_list %}
+        <img src="{{ obj.social.icon }}" alt="{{ obj.social.name}}" width="50" height="50">
+
+    {{obj.social}}<br/>
+    {{ obj.link }}<br/>
+    <br>
+    {% endfor %}
+</div>
+</html>
