@@ -7,6 +7,7 @@ urlpatterns = [
          name='social-detail'),
     path('link/', views.LinkList.as_view(), name='link-list'),
     path('link/<int:pk>', views.LinkDetail.as_view(), name='link-detail'),
-    path('users/', views.UserLink.as_view(), name='user-link'),
+    path('users/', views.UserLink.as_view(), name='user-list'),
     path('users/<int:pk>', views.UserDetail.as_view(), name='user-detail'),
+    path('', views.ApiRoot.as_view(), name='api-root')
 ]

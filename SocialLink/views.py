@@ -5,12 +5,11 @@ from profiles.models import Link
 
 def profile_view(request, username):
 
-    user = User.objects.get(username=username)
     queryset = Link.objects.filter(user__username__exact=username)
 
     context = {
         "object_list": queryset,
-        "user": user
+        "username": username
     }
 
     return render(request, "user.html", context)

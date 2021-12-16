@@ -4,6 +4,8 @@ from .models import Social, Link
 from .serializers import SocialSerializer
 from .serializers import LinkSerializer
 from .serializers import UserSerializer
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
 from rest_framework import permissions
 from .custompermissions import IsCurrentUserOwnerOrReadOnly
 
@@ -51,3 +53,12 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     name = 'user-detail'
     permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
+
+
+class ApiRoot(generics.GenericAPIView):
+    name = 'api-root'
+
+    def get(self, request, *args, **kwargs):
+        return Response({'socials': reverse(SocialList.name, request=request),
+                         'links': reverse(LinkList.name, request=request),
+                         'users': reverse(UserLink.name, request=request)})
