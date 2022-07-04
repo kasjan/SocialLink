@@ -1,5 +1,5 @@
 from rest_framework import generics
-from django.contrib.auth.models import User
+from accounts.models import CustomUser as User
 from .models import Social, Link
 from .serializers import SocialSerializer
 from .serializers import LinkSerializer

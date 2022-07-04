@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -42,8 +43,12 @@ INSTALLED_APPS = [
     'profiles',
     'rest_framework',
     'django_filters',
-    'psycopg2'
+    'psycopg2',
+    'pyqrcode',
+    'accounts'
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -74,6 +79,8 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 WSGI_APPLICATION = 'SocialLink.wsgi.application'
 
 
@@ -83,7 +90,7 @@ WSGI_APPLICATION = 'SocialLink.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
+        'NAME': 'SLink',
         'USER': 'postgres',
         'PASSWORD': 'admin',
         'HOST': 'localhost',

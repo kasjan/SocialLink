@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
+from accounts.models import CustomUser as User
 from .models import Social
 from .models import Link
 
