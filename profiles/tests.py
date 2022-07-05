@@ -16,7 +16,8 @@ class SocialTests(APITestCase):
 
     def test_post_and_get_social(self):
         new_social_name = 'Github'
-        new_social_icon = SimpleUploadedFile("icon.jpg", b"file_content", content_type="image/jpg")
+        new_social_icon = SimpleUploadedFile("icon.jpg", b"file_content",
+                                             content_type="image/jpg")
         response = self.post_social(new_social_name, new_social_icon)
         assert response.status_code == status.HTTP_201_CREATED
         assert Social.objects.count() == 1

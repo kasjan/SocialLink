@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework import generics
 from accounts.models import CustomUser as User
 from .models import Social, Link
@@ -38,7 +39,8 @@ class LinkDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Link.objects.all()
     serializer_class = LinkSerializer
     name = 'link-detail'
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsCurrentUserOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsCurrentUserOwnerOrReadOnly]
 
 
 class UserLink(generics.ListAPIView):
@@ -62,3 +64,22 @@ class ApiRoot(generics.GenericAPIView):
         return Response({'socials': reverse(SocialList.name, request=request),
                          'links': reverse(LinkList.name, request=request),
                          'users': reverse(UserLink.name, request=request)})
+
+
+def profile_view(request, username):
+    if User.objects.filter(username__exact=username):
+        counter = User.objects.get(username__exact=username)
+        counter.views = counter.views + 1
+        counter.save()
+    queryset = Link.objects.filter(user__username__exact=username)
+    try:
+        desc = User.objects.get(username__exact=username)
+    except User.DoesNotExist:
+        desc = None
+    context = {
+        "object_list": queryset,
+        "username": username,
+        "desc": desc,
+    }
+
+    return render(request, "user.html", context)
