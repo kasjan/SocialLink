@@ -1,8 +1,14 @@
+"""Tests.py file."""
+# Django
 from django.core.files.uploadedfile import SimpleUploadedFile
-from rest_framework.test import APITestCase
-from rest_framework.reverse import reverse
-from . import views
+
+# 3rd-party
 from rest_framework import status
+from rest_framework.reverse import reverse
+from rest_framework.test import APITestCase
+
+# Local
+from . import views
 from .models import Social
 
 
@@ -16,8 +22,8 @@ class SocialTests(APITestCase):
 
     def test_post_and_get_social(self):
         new_social_name = 'Github'
-        new_social_icon = SimpleUploadedFile("icon.jpg", b"file_content",
-                                             content_type="image/jpg")
+        new_social_icon = SimpleUploadedFile('icon.jpg', b"file_content",
+                                             content_type='image/jpg')
         response = self.post_social(new_social_name, new_social_icon)
         assert response.status_code == status.HTTP_201_CREATED
         assert Social.objects.count() == 1

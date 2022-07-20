@@ -1,14 +1,23 @@
+"""Views file."""
+# Django
 from django.shortcuts import render
+
+# 3rd-party
 from rest_framework import generics
-from accounts.models import CustomUser as User
-from .models import Social, Link
-from .serializers import SocialSerializer
-from .serializers import LinkSerializer
-from .serializers import UserSerializer
+from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from rest_framework import permissions
+
+# Project
+from accounts.models import CustomUser as User
+
+# Local
 from .custompermissions import IsCurrentUserOwnerOrReadOnly
+from .models import Link
+from .models import Social
+from .serializers import LinkSerializer
+from .serializers import SocialSerializer
+from .serializers import UserSerializer
 
 
 class SocialList(generics.ListCreateAPIView):
@@ -77,9 +86,8 @@ def profile_view(request, username):
     except User.DoesNotExist:
         desc = None
     context = {
-        "object_list": queryset,
-        "username": username,
-        "desc": desc,
+        'object_list': queryset,
+        'user': desc,
     }
 
-    return render(request, "user.html", context)
+    return render(request, 'user.html', context)

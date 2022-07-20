@@ -1,7 +1,13 @@
+"""Serializers.py file."""
+# 3rd-party
 from rest_framework import serializers
+
+# Project
 from accounts.models import CustomUser as User
-from .models import Social
+
+# Local
 from .models import Link
+from .models import Social
 
 
 class SocialSerializer(serializers.ModelSerializer):

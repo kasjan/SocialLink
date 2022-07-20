@@ -1,19 +1,27 @@
+"""Models.py file."""
+# Standard Library
 import os
-from SocialLink.settings import MEDIA_ROOT
-from accounts.models import CustomUser as User
+
+# Django
 from django.db import models
+
+# Project
+from accounts.models import CustomUser as User
+from SocialLink.settings import MEDIA_ROOT
 
 
 class Social(models.Model):
+    """Socials model."""
+
     name = models.CharField(
         max_length=200,
     )
     icon = models.ImageField(upload_to='icons/')
 
-    def __str__(self):
+    def __str__(self):  # noqa: D105
         return self.name
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs):  # noqa: D102
         folder = f'{MEDIA_ROOT}/qr_codes'
         if not os.path.exists(folder):
             os.mkdir(folder)
@@ -21,6 +29,7 @@ class Social(models.Model):
 
 
 class Link(models.Model):
+    """Users link model."""
     social = models.ForeignKey(
         Social,
         on_delete=models.CASCADE,
@@ -28,7 +37,7 @@ class Link(models.Model):
         null=False,
     )
     link = models.URLField(
-        blank=False
+        blank=False,
     )
     user = models.ForeignKey(
         User,
@@ -36,5 +45,10 @@ class Link(models.Model):
         on_delete=models.CASCADE,
         blank=False)
 
-    def __str__(self):
+    def __str__(self):  # noqa: D105
         return self.link
+
+    def save(self, *args, **kwargs):  # noqa: D102
+        if Social.objects.filter(link__user=self.user):
+            raise ValueError(f"{self.social} for {self.user} already exist.")
+        return super().save(*args, **kwargs)

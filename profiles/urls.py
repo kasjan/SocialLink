@@ -1,4 +1,8 @@
+"""Urls.py file."""
+# Django
 from django.urls import path
+
+# Local
 from . import views
 
 urlpatterns = [
