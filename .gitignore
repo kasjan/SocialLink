@@ -7,3 +7,4 @@ media
 *.bak
 .idea/
 settings_local.py
+apps_static
