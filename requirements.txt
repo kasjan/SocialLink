@@ -1,4 +1,4 @@
-django==4.1.7
+django==4.2.2
 djangorestframework==3.14.0
 djangorestframework_simplejwt==5.2.2
 qrcode==7.4.2

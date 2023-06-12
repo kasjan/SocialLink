@@ -12,7 +12,7 @@ flake8-pep3101==1.3.0
 flake8-quotes==3.3.1
 flake8-string-format==0.3.0
 flake8==4.0.1
-ipython==8.4.0
+ipython==8.14
 isort==5.10.1
 mock==4.0.3
 pydocstyle==6.1.1
