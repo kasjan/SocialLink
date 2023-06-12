@@ -13,7 +13,7 @@ from SocialLink.settings import MEDIA_ROOT
 
 
 def qr_code_generator(nick):
-    """Generate QR Code for user"""
+    """Generate QR Code for user."""
     qr = pyqrcode.create(f'{Site.objects.get_current().domain}/{nick}')
     folder = f'{MEDIA_ROOT}/qr_codes'
     if not os.path.exists(folder):

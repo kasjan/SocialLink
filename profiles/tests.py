@@ -12,17 +12,17 @@ from . import views
 from .models import Social
 
 
-class SocialTests(APITestCase):
-    def post_social(self, name, icon):
+class SocialTests(APITestCase):  # noqa D101
+    def post_social(self, name, icon):  # noqa D101
         url = reverse(views.SocialList.name)
         data = {'name': name,
-                'icon': icon, }
+                'icon': icon}
         response = self.client.post(url, data, format='json')
         return response
 
-    def test_post_and_get_social(self):
+    def test_post_and_get_social(self):  # noqa D102
         new_social_name = 'Github'
-        new_social_icon = SimpleUploadedFile('icon.jpg', b"file_content",
+        new_social_icon = SimpleUploadedFile('icon.jpg', b'file_content',
                                              content_type='image/jpg')
         response = self.post_social(new_social_name, new_social_icon)
         assert response.status_code == status.HTTP_201_CREATED

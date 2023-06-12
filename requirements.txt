@@ -1,7 +1,9 @@
-Django==4.0.6
-djangorestframework==3.13.1
-djangorestframework_simplejwt==5.2.0
-PyQRCode==1.2.1
-Pillow==9.2.0
-psycopg2-binary==2.9.3
-django-filter==22.1
+django==4.1.7
+djangorestframework==3.14.0
+djangorestframework_simplejwt==5.2.2
+qrcode==7.4.2
+psycopg2-binary==2.9.5
+dj-rest-auth==4.0.1
+pyqrcode==1.2.1
+Pillow==9.4.0
+django-allauth==0.54.0

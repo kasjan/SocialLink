@@ -30,6 +30,7 @@ class Social(models.Model):
 
 class Link(models.Model):
     """Users link model."""
+
     social = models.ForeignKey(
         Social,
         on_delete=models.CASCADE,
@@ -50,5 +51,5 @@ class Link(models.Model):
 
     def save(self, *args, **kwargs):  # noqa: D102
         if Social.objects.filter(link__user=self.user):
-            raise ValueError(f"{self.social} for {self.user} already exist.")
+            raise ValueError(f'{self.social} for {self.user} already exist.')
         return super().save(*args, **kwargs)

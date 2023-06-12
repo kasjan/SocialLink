@@ -10,43 +10,48 @@ from .models import Link
 from .models import Social
 
 
-class SocialSerializer(serializers.ModelSerializer):
-    class Meta:
+class SocialSerializer(serializers.ModelSerializer):  # noqa D101
+    class Meta:  # noqa D106
         model = Social
         fields = [
             'url',
             'name',
-            'icon'
+            'icon',
         ]
 
 
-class LinkSerializer(serializers.HyperlinkedModelSerializer):
+class LinkSerializer(serializers.HyperlinkedModelSerializer):  # noqa D101
     user = serializers.SlugRelatedField(queryset=User.objects.all(),
                                         slug_field='username')
     social = serializers.SlugRelatedField(queryset=Social.objects.all(),
                                           slug_field='name')
 
-    class Meta:
+    class Meta:  # noqa D106
         model = Link
         fields = [
             'url',
             'id',
             'social',
             'link',
-            'user'
+            'user',
         ]
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.HyperlinkedModelSerializer):  # noqa D101
     link = serializers.HyperlinkedRelatedField(many=True,
                                                read_only=True,
                                                view_name='link-detail')
 
-    class Meta:
+    class Meta:  # noqa D106
         model = User
         fields = [
             'id',
             'username',
             'email',
-            'link'
+            'description',
+            'link',
+            'qr_code',
+            'background',
+            'photo',
+            'views',
         ]
